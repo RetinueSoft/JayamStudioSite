@@ -85,7 +85,7 @@
     <section class="opening" id="home" aria-label="Jayam Stories wedding animation">
       <div class="art"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture disableremoteplayback aria-label="Animated illustration of a Tamil wedding couple"></video></div>
       <header class="topbar">
-        <a class="logo" href="#home" aria-label="Jayam Stories home"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture><source src="tamil_wedding_gif_and_frames/Video/logo.webm" type="video/webm"></video></a>
+        <a class="logo" href="#home" aria-label="Jayam Stories home"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture><source src="video/logo.webm" type="video/webm"></video></a>
         <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel"><span></span><span></span></button>
       </header>
       <nav class="menu-panel" id="menu-panel" aria-label="Main navigation"><a href="#home">Home</a><a href="#story">Our story</a><a href="#contact">Contact</a></nav>
@@ -97,7 +97,7 @@
       <div class="stat"><span class="stat-number" data-count="1">0</span><span class="stat-label">Camera. Always.</span></div>
     </section>
     <section class="style-section" id="style">
-      <div class="style-photo"><img src="tamil_wedding_gif_and_frames/Photo/Arjun_Divya_Wedding_Preview.webp" alt="Arjun and Divya sharing a moment during their wedding celebration"></div>
+      <div class="style-photo"><img src="photo/Arjun_Divya_Wedding_Preview.webp" alt="Arjun and Divya sharing a moment during their wedding celebration"></div>
       <div class="style-copy"><span class="eyebrow">Our style</span><h2>Moments, as<br>they truly felt.</h2><p>We specialize in documentary-style photography and filmmaking, capturing genuine emotions, fleeting moments, and the stories that unfold naturally.</p><p>We believe photography is about more than posed portraits. It's about the tears, the laughter, the little gestures, and the people who make your story unique. Rather than simply directing every moment, we observe, anticipate, and document your celebration as it unfolds, preserving genuine emotions and meaningful details through photographs and films.</p><p>Alongside our documentary approach, we also embrace timeless wedding traditions and creative portraits, crafting a beautiful collection of memories that captures not just how your celebration looked, but how it felt — a story to be relived for generations.</p></div>
     </section>
     <section class="gallery" aria-labelledby="gallery-title">
@@ -110,7 +110,7 @@
     </section>
     <dialog class="lightbox" aria-label="Full size wedding photograph"><div class="lightbox-frame"><img src="" alt="Expanded wedding photograph"><button class="lightbox-close" type="button" aria-label="Close image">×</button></div></dialog>
     <footer class="footer" id="contact">
-      <div class="footer-brand"><a href="#home" aria-label="Jayam Stories home"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture><source src="tamil_wedding_gif_and_frames/Video/logo.webm" type="video/webm"></video></a><p>Documentary wedding films and photographs, made to be felt again.</p></div>
+      <div class="footer-brand"><a href="#home" aria-label="Jayam Stories home"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture><source src="video/logo.webm" type="video/webm"></video></a><p>Documentary wedding films and photographs, made to be felt again.</p></div>
       <nav class="footer-col" aria-label="Quick links"><h3>Quick Links</h3><a href="#home">Home</a><a href="#style">Our Style</a><a href="#gallery-title">Stories</a><a href="#video-title">Wedding Films</a></nav>
       <div class="footer-col"><h3>Our Services</h3><a href="#style">Wedding Photography</a><a href="#video-title">Wedding Films</a><a href="#gallery-title">Creative Portraits</a><a href="#style">Destination Weddings</a></div>
       <div class="footer-col"><h3>Contact Us</h3><a href="mailto:hello@example.com">hello@example.com</a><a href="https://www.instagram.com/reels/DeJwW6xuSMR/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="mailto:hello@example.com?subject=Wedding%20enquiry">Tell us about your day ↗</a></div>
@@ -120,14 +120,14 @@
   <script>
     const heroVideo=document.querySelector('.art video');
     const portraitMode=window.matchMedia('(orientation: portrait)');
-    function setHeroVideo(){const file=portraitMode.matches?'Portrate_HomeSection.webm':'Landscape_HomeSection.webm';const src='tamil_wedding_gif_and_frames/Video/'+file;if(heroVideo.dataset.src!==src){heroVideo.dataset.src=src;heroVideo.src=src;heroVideo.load();heroVideo.play().catch(()=>{})}}
+    function setHeroVideo(){const file=portraitMode.matches?'Portrate_HomeSection.webm':'Landscape_HomeSection.webm';const src='video/'+file;if(heroVideo.dataset.src!==src){heroVideo.dataset.src=src;heroVideo.src=src;heroVideo.load();heroVideo.play().catch(()=>{})}}
     setHeroVideo();
     portraitMode.addEventListener?.('change',setHeroVideo);
     const statsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const stat=entry.target;const number=stat.querySelector('.stat-number');const target=Number(number.dataset.count);const suffix=number.dataset.suffix||'';const duration=1300;const start=performance.now();stat.classList.add('visible');function count(now){const progress=Math.min((now-start)/duration,1);const eased=1-Math.pow(1-progress,3);number.textContent=Math.round(target*eased)+suffix;if(progress<1)requestAnimationFrame(count)}requestAnimationFrame(count);statsObserver.unobserve(stat)}}),{threshold:.35});
     document.querySelectorAll('.stat').forEach(stat=>statsObserver.observe(stat));
     const galleryTrack=document.querySelector('.gallery-track');
     const galleryFiles=['s1.jpeg','s2.jpeg','s3.png','s4.png'];
-    const galleryPhotos=Array.from({length:5},()=>galleryFiles).flat().map(name=>'tamil_wedding_gif_and_frames/Photo/Scroll/'+name);
+    const galleryPhotos=Array.from({length:5},()=>galleryFiles).flat().map(name=>'photo/Scroll/'+name);
     galleryPhotos.forEach((src,index)=>{const card=document.createElement('button');card.type='button';card.className='gallery-card';card.dataset.full=src;card.setAttribute('aria-label',`View wedding photo ${index+1} full size`);const image=document.createElement('img');image.src=src;image.alt=`Wedding photo ${index+1}`;image.loading='lazy';card.append(image);galleryTrack.append(card)});
     const videoTrack=document.querySelector('.video-track');
     const reelUrl='https://www.instagram.com/reels/DeJwW6xuSMR/';
