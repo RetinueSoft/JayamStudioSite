@@ -1,0 +1,23 @@
+:80 {
+    encode zstd gzip
+    root * /srv
+
+    # Browsers must re-check with the server before using a cached copy,
+    # so a new deploy shows up immediately (unchanged files still return 304)
+    header Cache-Control "no-cache"
+
+    @html path_regexp html ^/(.+)\.html$
+
+    route {
+        # Old .html links -> clean URLs (/about.html -> /about)
+        redir /index.html / 308
+        redir @html /{re.html.1} 308
+
+        # Clean URLs -> files on disk (/about -> about.html)
+        try_files {path} {path}.html
+
+        file_server {
+            hide .git .svn .gitignore Caddyfile docker-compose.yml update.sh .deployed_sha
+        }
+    }
+}

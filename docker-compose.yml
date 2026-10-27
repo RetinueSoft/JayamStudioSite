@@ -1,0 +1,11 @@
+services:
+  site:
+    image: caddy:2-alpine
+    container_name: jayamstudio-static
+    restart: unless-stopped
+    ports:
+      # Use a separate host port because the existing VPS Caddy uses 80/443.
+      - "${SITE_PORT:-8083}:80"
+    volumes:
+      - ./:/srv:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
