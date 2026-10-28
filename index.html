@@ -7,12 +7,12 @@
   <meta name="description" content="Jayam Stories — wedding films that hold on to the feeling of your day.">
   <title>Jayam Stories — Wedding Films</title>
   <style>
-    :root{--canvas:#F3EDF2;--ink:#151411;--line:rgba(21,20,17,.18)}
+    :root{--canvas:#F3EDF2;--ink:#151411;--line:rgba(21,20,17,.18);--frame:#76566E}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;background:var(--canvas)}
     body{margin:0;background:var(--canvas);color:var(--ink);font-family:Arial,sans-serif}
     a{color:inherit;text-decoration:none}
-    .opening{height:100vh;height:100svh;min-height:480px;position:relative;overflow:hidden;background:var(--canvas);isolation:isolate}
+    .opening{height:100vh;height:100svh;min-height:480px;position:relative;overflow:hidden;background:var(--canvas);isolation:isolate;border-bottom:8px solid var(--frame)}
     .art{position:absolute;inset:0;z-index:-1;display:grid;place-items:center;overflow:hidden;background:var(--canvas)}
     .art video{width:auto;height:auto;max-width:90vw;max-height:78vh;object-fit:contain;object-position:center center;display:block;mix-blend-mode:multiply}
     .topbar{position:absolute;z-index:2;top:0;left:0;right:0;height:94px;padding:20px clamp(22px,7vw,80px);display:flex;align-items:center;justify-content:space-between}
@@ -25,7 +25,13 @@
     .menu-panel{position:absolute;z-index:3;top:78px;right:clamp(20px,7vw,80px);display:none;min-width:170px;padding:18px 20px;background:var(--canvas);border:1px solid var(--line);text-align:right}
     .menu-panel.open{display:grid;gap:16px}
     .menu-panel a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px}
-    .stats{min-height:180px;padding:38px 7vw;background:#76566E;color:#FAF5F1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
+    .scroll-cue{position:absolute;z-index:2;left:50%;bottom:clamp(18px,3.5vh,34px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:#76566E;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:6px 10px;transition:opacity .4s ease,transform .4s ease}
+    .scroll-cue .mouse{width:24px;height:38px;border:1.5px solid currentColor;border-radius:14px;position:relative;opacity:.85;transition:opacity .2s}
+    .scroll-cue .mouse::before{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:currentColor;animation:cue-wheel 1.8s ease-in-out infinite}
+    .scroll-cue:hover .mouse,.scroll-cue:focus-visible .mouse{opacity:1}
+    .scroll-cue.hidden{opacity:0;transform:translate(-50%,10px);pointer-events:none}
+    @keyframes cue-wheel{0%{opacity:0;transform:translateY(0)}25%{opacity:1}70%{opacity:1;transform:translateY(11px)}100%{opacity:0;transform:translateY(13px)}}
+    .stats{position:relative;margin-top:-1px;min-height:180px;padding:38px 7vw;background:#76566E;color:#FAF5F1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
     .stat{text-align:center;padding:10px 14px;border-right:1px solid rgba(250,245,241,.28)}
     .stat:last-child{border-right:0}
     .stat-number{display:block;font:400 clamp(36px,4.6vw,58px)/1 Georgia,'Times New Roman',serif;letter-spacing:-.035em;opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
@@ -77,7 +83,7 @@
     @media(max-width:900px){.footer{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 8vw}.footer-bottom{margin-top:0}}
     @media(max-width:680px){.opening{min-height:560px}.topbar{height:82px;padding:14px 22px}.logo{width:82px;height:50px}.art video{width:100%;height:auto;max-width:none;object-fit:contain}.stats{min-height:0;padding:22px 6vw;grid-template-columns:repeat(2,minmax(0,1fr));row-gap:0}.stat{padding:23px 8px;border-right:1px solid rgba(250,245,241,.28);border-bottom:1px solid rgba(250,245,241,.28)}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}.stat-number{font-size:42px}.stat-label{font-size:8px;letter-spacing:.13em}.style-section{padding:76px 8vw 82px;grid-template-columns:1fr;gap:32px}.style-photo{height:58vh;min-height:320px;max-height:540px}.style-copy h2{font-size:52px}.style-copy p{font-size:13px}.footer{padding:42px 7vw 22px;grid-template-columns:1fr 1fr;gap:28px 22px}.footer-brand{grid-column:1/-1}.footer-brand video{width:140px;height:78px}.footer-col h3{font-size:15px}.footer-col a,.footer-brand p{font-size:12px}.footer-bottom{grid-column:1/-1}}
     @media(max-width:680px){.gallery{padding:67px 6vw 74px}.gallery-head{margin-bottom:20px}.gallery-head h2{font-size:40px}.gallery-arrow{width:36px;height:36px}.gallery-arrow.prev{left:6px}.gallery-arrow.next{right:6px}.gallery-track{gap:11px}.gallery-card{flex-basis:44%;border-radius:17px}.video-section{padding:67px 6vw 74px}.video-section .gallery-head{margin-bottom:20px}.video-section .gallery-head h2{font-size:40px}.video-track{gap:11px}.video-card{flex-basis:44%;border-radius:17px}.video-section .gallery-arrow.prev{left:6px}.video-section .gallery-arrow.next{right:6px}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-button span{transition:none}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-button span{transition:none}.scroll-cue .mouse::before{animation:none;opacity:1}}
   </style>
 </head>
 <body>
@@ -89,8 +95,9 @@
         <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel"><span></span><span></span></button>
       </header>
       <nav class="menu-panel" id="menu-panel" aria-label="Main navigation"><a href="#home">Home</a><a href="#story">Our story</a><a href="#contact">Contact</a><a href="index2.html">Version 2</a></nav>
+      <a class="scroll-cue" href="#stats" aria-label="Scroll down"><span class="mouse" aria-hidden="true"></span><span aria-hidden="true">Scroll</span></a>
     </section>
-    <section class="stats" aria-label="Studio statistics">
+    <section class="stats" id="stats" aria-label="Studio statistics">
       <div class="stat"><span class="stat-number" data-count="250" data-suffix="+">0</span><span class="stat-label">Wedding films</span></div>
       <div class="stat"><span class="stat-number" data-count="43" data-suffix="+">0</span><span class="stat-label">Cities &amp; Destination</span></div>
       <div class="stat"><span class="stat-number" data-count="5">0</span><span class="stat-label">Years film making</span></div>
@@ -186,6 +193,8 @@
     videoViewport.querySelector('.prev').addEventListener('click',()=>moveVideo(-1));
     videoViewport.querySelector('.next').addEventListener('click',()=>moveVideo(1));
     requestAnimationFrame(()=>{jumpVideo(originalVideoStart());startVideoAuto()});
+    const scrollCue=document.querySelector('.scroll-cue');
+    addEventListener('scroll',()=>scrollCue.classList.toggle('hidden',scrollY>40),{passive:true});
     const button=document.querySelector('.menu-button');
     const panel=document.querySelector('.menu-panel');
     button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close menu':'Open menu');panel.classList.toggle('open',open)});
