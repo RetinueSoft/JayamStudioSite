@@ -3,43 +3,54 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#FAF5F1">
+  <meta name="theme-color" content="var(--bg-main)">
   <meta name="description" content="Jayam Stories — wedding films that hold on to the feeling of your day.">
   <title>Jayam Stories — Wedding Films</title>
   <style>
-    :root{--canvas:#FAF4E9;--ink:#151411;--line:rgba(21,20,17,.18);--frame:#9E2638}
+    :root{--primary-brand:#9E2638;--bg-main:#FDFBF7;--text-primary:#1E1E1E;--accent-gold:#D4AF37;--border-subtle:#E8E2D9}
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--canvas)}
-    body{margin:0;background:var(--canvas);color:var(--ink);font-family:Arial,sans-serif}
+    html{scroll-behavior:smooth;background:var(--bg-main)}
+    body{margin:0;background:var(--bg-main);color:var(--text-primary);font-family:Arial,sans-serif}
     a{color:inherit;text-decoration:none}
-    .opening{height:100vh;height:100svh;min-height:480px;position:relative;overflow:hidden;background:var(--canvas);isolation:isolate;border-bottom:10px solid var(--frame)}
-    .art{position:absolute;inset:0;z-index:-1;display:grid;place-items:center;overflow:hidden;background:var(--canvas)}
+    .opening{height:100vh;height:100svh;min-height:480px;position:relative;overflow:hidden;background:var(--bg-main);isolation:isolate;border-bottom:10px solid var(--primary-brand)}
+    .art{position:absolute;inset:0;z-index:-1;display:grid;place-items:center;overflow:hidden;background:var(--bg-main)}
     .art picture{display:contents}
     .art img{width:auto;height:auto;max-width:90vw;max-height:78vh;object-fit:contain;object-position:center center;display:block;mix-blend-mode:multiply}
     .topbar{position:absolute;z-index:2;top:0;left:0;right:0;height:94px;padding:20px clamp(22px,7vw,80px);display:flex;align-items:center;justify-content:space-between}
-    .logo{display:block;width:100px;height:58px;overflow:hidden;background:var(--canvas);isolation:isolate}
+    .logo{display:block;width:100px;height:58px;overflow:hidden;background:var(--bg-main);isolation:isolate}
     .logo video{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
     .menu-button{width:42px;height:42px;display:grid;place-content:center;gap:6px;border:0;background:transparent;cursor:pointer;padding:8px}
-    .menu-button span{display:block;width:21px;height:1.5px;background:var(--ink);transition:transform .2s,opacity .2s}
-    .menu-button[aria-expanded="true"] span:first-child{transform:translateY(3.75px) rotate(45deg)}
-    .menu-button[aria-expanded="true"] span:last-child{transform:translateY(-3.75px) rotate(-45deg)}
-    .menu-panel{position:absolute;z-index:3;top:78px;right:clamp(20px,7vw,80px);display:none;min-width:170px;padding:18px 20px;background:var(--canvas);border:1px solid var(--line);text-align:right}
-    .menu-panel.open{display:grid;gap:16px}
-    .menu-panel a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px}
-    .scroll-cue{position:absolute;z-index:2;left:50%;bottom:clamp(18px,3.5vh,34px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:#9E2638;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:6px 10px;transition:opacity .4s ease,transform .4s ease}
+    .menu-button span{display:block;width:21px;height:1.5px;background:var(--text-primary);transition:transform .2s,opacity .2s}
+    .drawer{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;justify-content:space-between;padding:22px clamp(22px,7vw,80px) 26px;background:rgba(48,14,21,.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--bg-main);opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s}
+    .drawer.open{opacity:1;visibility:visible;transition:opacity .3s ease}
+    .drawer-head{display:flex;justify-content:space-between;align-items:center;min-height:52px}
+    .drawer-brand{font:400 20px/1 Georgia,'Times New Roman',serif;letter-spacing:.22em;text-transform:uppercase}
+    .drawer-close{position:relative;width:44px;height:44px;border:0;background:transparent;color:inherit;cursor:pointer;transition:color .3s}
+    .drawer-close::before,.drawer-close::after{content:"";position:absolute;left:50%;top:50%;width:24px;height:1.5px;margin-left:-12px;background:currentColor;transform:rotate(45deg)}
+    .drawer-close::after{transform:rotate(-45deg)}
+    .drawer-close:hover,.drawer-close:focus-visible{color:var(--accent-gold)}
+    .drawer-nav{display:flex;flex-direction:column;align-items:center;gap:26px;margin:auto 0;text-align:center}
+    .drawer-nav a{font:400 clamp(22px,3vw,30px)/1.3 Georgia,'Times New Roman',serif;letter-spacing:.01em;color:var(--bg-main);opacity:0;transform:translateY(10px);transition:color .3s,opacity .4s ease,transform .4s ease}
+    .drawer.open .drawer-nav a{opacity:1;transform:none}
+    .drawer.open .drawer-nav a:nth-child(2){transition-delay:0s,.05s,.05s}
+    .drawer.open .drawer-nav a:nth-child(3){transition-delay:0s,.1s,.1s}
+    .drawer.open .drawer-nav a:nth-child(4){transition-delay:0s,.15s,.15s}
+    .drawer-nav a:hover,.drawer-nav a:focus-visible,.drawer-nav a.active{color:var(--accent-gold)}
+    .drawer-foot{padding-top:20px;border-top:1px solid rgba(232,226,217,.2);text-align:center;font-size:13px;line-height:20px;color:rgba(253,251,247,.7)}
+    .scroll-cue{position:absolute;z-index:2;left:50%;bottom:clamp(18px,3.5vh,34px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--primary-brand);font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:6px 10px;transition:opacity .4s ease,transform .4s ease}
     .scroll-cue .mouse{width:24px;height:38px;border:1.5px solid currentColor;border-radius:14px;position:relative;opacity:.85;transition:opacity .2s}
     .scroll-cue .mouse::before{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:currentColor;animation:cue-wheel 1.8s ease-in-out infinite}
     .scroll-cue:hover .mouse,.scroll-cue:focus-visible .mouse{opacity:1}
     .scroll-cue.hidden{opacity:0;transform:translate(-50%,10px);pointer-events:none}
     @keyframes cue-wheel{0%{opacity:0;transform:translateY(0)}25%{opacity:1}70%{opacity:1;transform:translateY(11px)}100%{opacity:0;transform:translateY(13px)}}
-    .stats{position:relative;margin-top:-1px;min-height:180px;padding:38px 7vw;background:#9E2638;color:#FAF5F1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
-    .stat{text-align:center;padding:10px 14px;border-right:1px solid rgba(250,245,241,.28)}
+    .stats{position:relative;margin-top:-1px;min-height:180px;padding:38px 7vw;background:var(--primary-brand);color:var(--bg-main);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
+    .stat{text-align:center;padding:10px 14px;border-right:1px solid rgba(253,251,247,.28)}
     .stat:last-child{border-right:0}
     .stat-number{display:block;font:400 clamp(36px,4.6vw,58px)/1 Georgia,'Times New Roman',serif;letter-spacing:-.035em;opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
     .stat.visible .stat-number{opacity:1;transform:translateY(0)}
     .stat-label{display:block;margin-top:10px;font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.88}
     .style-section{padding:105px 8vw;background:#fff;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:8vw}
-    .style-photo{height:min(68vh,660px);min-height:420px;overflow:hidden;background:#e9dfd7}
+    .style-photo{height:min(68vh,660px);min-height:420px;overflow:hidden;background:var(--border-subtle)}
     .style-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
     .style-copy{max-width:620px}
     .style-copy h2{font:400 clamp(44px,6vw,76px)/.98 Georgia,'Times New Roman',serif;letter-spacing:-.035em;margin:20px 0 27px}
@@ -48,12 +59,12 @@
     .gallery-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:27px}
     .gallery-head h2{font-size:clamp(38px,5vw,62px);margin:12px 0 0}
     .gallery-viewport{position:relative}
-    .gallery-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(21,20,17,.2);border-radius:50%;background:rgba(250,244,233,.92);backdrop-filter:blur(8px);color:var(--ink);font-size:23px;line-height:1;cursor:pointer;box-shadow:0 3px 14px #0002;transition:background .2s,color .2s,transform .2s}
-    .gallery-arrow:hover{background:var(--ink);color:#fff;transform:translateY(-50%) scale(1.05)}
+    .gallery-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(21,20,17,.2);border-radius:50%;background:rgba(253,251,247,.92);backdrop-filter:blur(8px);color:var(--text-primary);font-size:23px;line-height:1;cursor:pointer;box-shadow:0 3px 14px #0002;transition:background .2s,color .2s,transform .2s}
+    .gallery-arrow:hover{background:var(--text-primary);color:#fff;transform:translateY(-50%) scale(1.05)}
     .gallery-arrow.prev{left:10px}.gallery-arrow.next{right:10px}
     .gallery-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 1px 5px;scrollbar-width:none}
     .gallery-track::-webkit-scrollbar{display:none}
-    .gallery-card{appearance:none;border:0;padding:0;background:#e5ded8;position:relative;flex:0 0 calc((100% - 56px)/5);aspect-ratio:.76;overflow:hidden;border-radius:19px;cursor:zoom-in;scroll-snap-align:start}
+    .gallery-card{appearance:none;border:0;padding:0;background:var(--border-subtle);position:relative;flex:0 0 calc((100% - 56px)/5);aspect-ratio:.76;overflow:hidden;border-radius:19px;cursor:zoom-in;scroll-snap-align:start}
     .gallery-card img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .45s ease}
     .gallery-card:hover img{transform:scale(1.035)}
     .lightbox{border:0;padding:0;background:transparent;max-width:none;max-height:none;overflow:visible}
@@ -66,61 +77,99 @@
     .video-section .gallery-head h2{font-size:clamp(38px,5vw,62px)}
     .video-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 1px 5px;scrollbar-width:none}
     .video-track::-webkit-scrollbar{display:none}
-    .video-card{display:block;position:relative;flex:0 0 calc((100% - 56px)/5);aspect-ratio:.76;overflow:hidden;border-radius:19px;background:#e5ded8;scroll-snap-align:start}
+    .video-card{display:block;position:relative;flex:0 0 calc((100% - 56px)/5);aspect-ratio:.76;overflow:hidden;border-radius:19px;background:var(--border-subtle);scroll-snap-align:start}
     .video-card img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
     .video-card:hover img{transform:scale(1.035)}
     .video-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border:1px solid rgba(255,255,255,.86);border-radius:50%;display:grid;place-items:center;background:rgba(21,20,17,.36);color:#fff;font-size:17px;padding-left:3px;backdrop-filter:blur(4px)}
-    .video-section .gallery-arrow{color:var(--ink)}
+    .video-section .gallery-arrow{color:var(--text-primary)}
     .eyebrow{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#766b60}
     h1,h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;line-height:.98;letter-spacing:-.035em}
     h2{font-size:clamp(44px,6vw,82px);margin:22px 0}
-    .footer{padding:55px 7vw 24px;background:#9E2638;color:#FAF5F1;display:grid;grid-template-columns:1.25fr .9fr 1.1fr 1.25fr;gap:4vw;font-size:13px;line-height:1.7}
+    .footer{padding:55px 7vw 24px;background:var(--primary-brand);color:var(--bg-main);display:grid;grid-template-columns:1.25fr .9fr 1.1fr 1.25fr;gap:4vw;font-size:13px;line-height:1.7}
     .footer-brand video{display:block;width:155px;height:88px;object-fit:contain;filter:invert(1);mix-blend-mode:screen;margin:-14px 0 8px}
     .footer-brand p{max-width:280px;color:#ffffffbf;margin:0;font-size:13px;line-height:1.8}
     .footer-col h3{font:600 17px/1.2 Arial,sans-serif;margin:0 0 18px;color:#fff}
     .footer-col a{display:block;width:fit-content;margin:0 0 9px;color:#f3eaf0;text-decoration:none;transition:color .2s}
-    .footer-col a:hover{color:#f0c58b}
+    .footer-col a:hover{color:var(--accent-gold)}
     .footer-bottom{grid-column:1/-1;border-top:1px solid #ffffff35;margin-top:17px;padding-top:17px;color:#ffffffa8;font-size:11px}
     @media(max-width:900px){.footer{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 8vw}.footer-bottom{margin-top:0}}
-    @media(max-width:680px){.opening{min-height:560px}.topbar{height:82px;padding:14px 22px}.logo{width:82px;height:50px}.art img{width:100%;height:auto;max-width:none;object-fit:contain}.stats{min-height:0;padding:22px 6vw;grid-template-columns:repeat(2,minmax(0,1fr));row-gap:0}.stat{padding:23px 8px;border-right:1px solid rgba(250,245,241,.28);border-bottom:1px solid rgba(250,245,241,.28)}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}.stat-number{font-size:42px}.stat-label{font-size:8px;letter-spacing:.13em}.style-section{padding:76px 8vw 82px;grid-template-columns:1fr;gap:32px}.style-photo{height:58vh;min-height:320px;max-height:540px}.style-copy h2{font-size:52px}.style-copy p{font-size:13px}.footer{padding:42px 7vw 22px;grid-template-columns:1fr 1fr;gap:28px 22px}.footer-brand{grid-column:1/-1}.footer-brand video{width:140px;height:78px}.footer-col h3{font-size:15px}.footer-col a,.footer-brand p{font-size:12px}.footer-bottom{grid-column:1/-1}}
+    @media(max-width:680px){.opening{min-height:560px}.topbar{height:82px;padding:14px 22px}.logo{width:82px;height:50px}.art img{width:100%;height:auto;max-width:none;object-fit:contain}.stats{min-height:0;padding:22px 6vw;grid-template-columns:repeat(2,minmax(0,1fr));row-gap:0}.stat{padding:23px 8px;border-right:1px solid rgba(253,251,247,.28);border-bottom:1px solid rgba(253,251,247,.28)}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}.stat-number{font-size:42px}.stat-label{font-size:8px;letter-spacing:.13em}.style-section{padding:76px 8vw 82px;grid-template-columns:1fr;gap:32px}.style-photo{height:58vh;min-height:320px;max-height:540px}.style-copy h2{font-size:52px}.style-copy p{font-size:13px}.footer{padding:42px 7vw 22px;grid-template-columns:1fr 1fr;gap:28px 22px}.footer-brand{grid-column:1/-1}.footer-brand video{width:140px;height:78px}.footer-col h3{font-size:15px}.footer-col a,.footer-brand p{font-size:12px}.footer-bottom{grid-column:1/-1}}
     @media(max-width:680px){.gallery{padding:67px 6vw 74px}.gallery-head{margin-bottom:20px}.gallery-head h2{font-size:40px}.gallery-arrow{width:36px;height:36px}.gallery-arrow.prev{left:6px}.gallery-arrow.next{right:6px}.gallery-track{gap:11px}.gallery-card{flex-basis:44%;border-radius:17px}.video-section{padding:67px 6vw 74px}.video-section .gallery-head{margin-bottom:20px}.video-section .gallery-head h2{font-size:40px}.video-track{gap:11px}.video-card{flex-basis:44%;border-radius:17px}.video-section .gallery-arrow.prev{left:6px}.video-section .gallery-arrow.next{right:6px}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-button span{transition:none}.scroll-cue .mouse::before{animation:none;opacity:1}}
+    .book{padding:105px 8vw;background:var(--bg-main);border-top:1px solid var(--border-subtle);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8vw;align-items:start}
+    .book-copy h2{font-size:clamp(40px,5vw,66px);margin:20px 0 27px}
+    .book-copy p{max-width:460px;font-size:13px;line-height:2;color:#5e5852;margin:0}
+    .book-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 28px;padding-top:12px}
+    .field{display:grid;gap:8px;min-width:0}
+    .field.full{grid-column:1/-1}
+    .field label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#766b60}
+    .field input{width:100%;min-width:0;font:15px/1.4 Arial,sans-serif;color:var(--text-primary);background:transparent;border:0;border-bottom:1px solid #cfc6ba;border-radius:0;padding:10px 0;outline:none;transition:border-color .2s}
+    .field input:focus{border-bottom-color:var(--primary-brand)}
+    .field input::placeholder{color:#b3aa9f}
+    .book-submit{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:12px;margin-top:6px;border:0;border-radius:999px;background:var(--primary-brand);color:#fff;padding:16px 30px;font:600 11px/1 Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .2s}
+    .book-submit:hover{background:#86202F;transform:translateY(-1px)}
+    .book-submit:focus-visible{outline:2px solid var(--accent-gold);outline-offset:3px}
+    .book-submit span{font-size:15px;transition:transform .2s}
+    .book-submit:hover span{transform:translateX(3px)}
+    .book-status{grid-column:1/-1;margin:0;min-height:1em;font-size:12px;line-height:1.7;color:#5e5852}
+    .book-status a{color:var(--primary-brand);text-decoration:underline}
+    @media(max-width:900px){.book{grid-template-columns:1fr;gap:44px;padding:80px 8vw 86px}}
+    @media(max-width:680px){.book{padding:67px 6vw 74px}.book-form{grid-template-columns:1fr;gap:24px}.book-copy h2{font-size:40px}.book-submit{justify-self:stretch;justify-content:center}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-button span,.drawer,.drawer-nav a{transition:none}.scroll-cue .mouse::before{animation:none;opacity:1}}
   </style>
 </head>
 <body>
+  <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true">
+    <div class="drawer-head"><span class="drawer-brand">Jayam Stories</span><button class="drawer-close" type="button" aria-label="Close menu"></button></div>
+    <nav class="drawer-nav" aria-label="Main navigation"><a href="#home">Home</a><a href="#stories">Stories in frames</a><a href="#films">Wedding films</a><a href="#book">Contact</a></nav>
+    <div class="drawer-foot">hello@example.com · Documentary wedding films &amp; photographs</div>
+  </div>
   <main>
     <section class="opening" id="home" aria-label="Jayam Stories wedding animation">
       <div class="art"><picture><source media="(orientation: portrait)" srcset="portrait/tamil_wedding_final_frame_1_2_seconds.gif"><img src="landscape/tamil_wedding_sequence_v2.gif" alt="Animated illustration of a Tamil wedding couple"></picture></div>
       <header class="topbar">
         <a class="logo" href="#home" aria-label="Jayam Stories home"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture><source src="video/logo.webm" type="video/webm"></video></a>
-        <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel"><span></span><span></span></button>
+        <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span></button>
       </header>
-      <nav class="menu-panel" id="menu-panel" aria-label="Main navigation"><a href="#home">Home</a><a href="#story">Our story</a><a href="#contact">Contact</a><a href="index2.html">Version 2</a></nav>
       <a class="scroll-cue" href="#stats" aria-label="Scroll down"><span class="mouse" aria-hidden="true"></span><span aria-hidden="true">Scroll</span></a>
     </section>
     <section class="stats" id="stats" aria-label="Studio statistics">
-      <div class="stat"><span class="stat-number" data-count="250" data-suffix="+">0</span><span class="stat-label">Wedding films</span></div>
-      <div class="stat"><span class="stat-number" data-count="43" data-suffix="+">0</span><span class="stat-label">Cities &amp; Destination</span></div>
-      <div class="stat"><span class="stat-number" data-count="5">0</span><span class="stat-label">Years film making</span></div>
-      <div class="stat"><span class="stat-number" data-count="1">0</span><span class="stat-label">Camera. Always.</span></div>
+      <div class="stat"><span class="stat-number" data-count="10" data-suffix="+">0</span><span class="stat-label">Years of Experience</span></div>
+      <div class="stat"><span class="stat-number" data-count="450" data-suffix="+">0</span><span class="stat-label">Stories Documented</span></div>
+      <div class="stat"><span class="stat-number" data-count="250" data-suffix="+">0</span><span class="stat-label">Families Captured</span></div>
+      <div class="stat"><span class="stat-number" data-count="100" data-suffix="%">0</span><span class="stat-label">Heart in Every Story</span></div>
     </section>
     <section class="style-section" id="style">
       <div class="style-photo"><img src="photo/Arjun_Divya_Wedding_Preview.webp" alt="Arjun and Divya sharing a moment during their wedding celebration"></div>
       <div class="style-copy"><span class="eyebrow">Our style</span><h2>Moments, as<br>they truly felt.</h2><p>We specialize in documentary-style photography and filmmaking, capturing genuine emotions, fleeting moments, and the stories that unfold naturally.</p><p>We believe photography is about more than posed portraits. It's about the tears, the laughter, the little gestures, and the people who make your story unique. Rather than simply directing every moment, we observe, anticipate, and document your celebration as it unfolds, preserving genuine emotions and meaningful details through photographs and films.</p><p>Alongside our documentary approach, we also embrace timeless wedding traditions and creative portraits, crafting a beautiful collection of memories that captures not just how your celebration looked, but how it felt — a story to be relived for generations.</p></div>
     </section>
-    <section class="gallery" aria-labelledby="gallery-title">
+    <section class="gallery" id="stories" aria-labelledby="gallery-title">
       <div class="gallery-head"><div><span class="eyebrow">The little moments</span><h2 id="gallery-title">Stories in frames.</h2></div></div>
       <div class="gallery-viewport"><div class="gallery-track" aria-label="Wedding photo thumbnails"></div><button class="gallery-arrow prev" type="button" aria-label="Previous photo">‹</button><button class="gallery-arrow next" type="button" aria-label="Next photo">›</button></div>
     </section>
-    <section class="video-section" aria-labelledby="video-title">
+    <section class="video-section" id="films" aria-labelledby="video-title">
       <div class="gallery-head"><div><span class="eyebrow">Watch the stories</span><h2 id="video-title">Wedding films.</h2></div></div>
       <div class="gallery-viewport video-viewport"><div class="video-track" aria-label="Wedding film thumbnails"></div><button class="gallery-arrow prev" type="button" aria-label="Previous video">‹</button><button class="gallery-arrow next" type="button" aria-label="Next video">›</button></div>
     </section>
     <dialog class="lightbox" aria-label="Full size wedding photograph"><div class="lightbox-frame"><img src="" alt="Expanded wedding photograph"><button class="lightbox-close" type="button" aria-label="Close image">×</button></div></dialog>
+    <section class="book" id="book" aria-labelledby="book-title">
+      <div class="book-copy">
+        <span class="eyebrow">Book your dates</span>
+        <h2 id="book-title">Let&rsquo;s capture your story as it unfolds.</h2>
+        <p>We limit our calendar to an exclusive number of weddings each season to guarantee total creative immersion and unmatched care for every film.</p>
+      </div>
+      <form class="book-form" novalidate>
+        <div class="field full"><label for="book-names">Names</label><input id="book-names" name="names" type="text" placeholder="Bride &amp; Groom" autocomplete="name" required></div>
+        <div class="field"><label for="book-date">Event date</label><input id="book-date" name="date" type="date" required></div>
+        <div class="field"><label for="book-location">Location</label><input id="book-location" name="location" type="text" placeholder="City or venue" required></div>
+        <div class="field full"><label for="book-phone">Phone number</label><input id="book-phone" name="phone" type="tel" placeholder="+91 XXXXX XXXXX" autocomplete="tel" inputmode="tel" required></div>
+        <button class="book-submit" type="submit">Tell us about your day <span aria-hidden="true">&rarr;</span></button>
+        <p class="book-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
     <footer class="footer" id="contact">
       <div class="footer-brand"><a href="#home" aria-label="Jayam Stories home"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture><source src="video/logo.webm" type="video/webm"></video></a><p>Documentary wedding films and photographs, made to be felt again.</p></div>
-      <nav class="footer-col" aria-label="Quick links"><h3>Quick Links</h3><a href="#home">Home</a><a href="#style">Our Style</a><a href="#gallery-title">Stories</a><a href="#video-title">Wedding Films</a></nav>
-      <div class="footer-col"><h3>Our Services</h3><a href="#style">Wedding Photography</a><a href="#video-title">Wedding Films</a><a href="#gallery-title">Creative Portraits</a><a href="#style">Destination Weddings</a></div>
+      <nav class="footer-col" aria-label="Quick links"><h3>Quick Links</h3><a href="#home">Home</a><a href="#stories">Stories in frames</a><a href="#films">Wedding films</a><a href="#book">Contact</a></nav>
+      <div class="footer-col"><h3>Our Services</h3><a href="#style">Wedding Photography</a><a href="#films">Wedding Films</a><a href="#stories">Creative Portraits</a><a href="#style">Destination Weddings</a></div>
       <div class="footer-col"><h3>Contact Us</h3><a href="mailto:hello@example.com">hello@example.com</a><a href="https://www.instagram.com/reels/DeJwW6xuSMR/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="mailto:hello@example.com?subject=Wedding%20enquiry">Tell us about your day ↗</a></div>
       <div class="footer-bottom">© 2026 Jayam Stories · Wedding films & photography</div>
     </footer>
@@ -189,12 +238,45 @@
     videoViewport.querySelector('.prev').addEventListener('click',()=>moveVideo(-1));
     videoViewport.querySelector('.next').addEventListener('click',()=>moveVideo(1));
     requestAnimationFrame(()=>{jumpVideo(originalVideoStart());startVideoAuto()});
+    // Booking form: opens WhatsApp with the enquiry typed out; the visitor taps Send
+    const WHATSAPP_NUMBER='919943135008';
+    const bookForm=document.querySelector('.book-form');
+    const bookStatus=bookForm.querySelector('.book-status');
+    const bookDate=bookForm.querySelector('#book-date');
+    const today=new Date();
+    bookDate.min=new Date(today.getTime()-today.getTimezoneOffset()*60000).toISOString().slice(0,10);
+    bookForm.addEventListener('submit',e=>{
+      e.preventDefault();
+      if(!bookForm.checkValidity()){bookForm.reportValidity();return}
+      const d=new FormData(bookForm);const get=n=>(d.get(n)||'').toString().trim();
+      const date=new Date(get('date')+'T00:00').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
+      const text=['New booking enquiry from Jayam Stories website','','Names: '+get('names'),'Event date: '+date,'Location: '+get('location'),'Phone: '+get('phone')].join('\n');
+      const url='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(text);
+      bookStatus.textContent='Opening WhatsApp... Please tap Send in WhatsApp to deliver your message. ';
+      const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener';link.textContent='Click here if WhatsApp did not open.';bookStatus.appendChild(link);
+      if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)){location.href=url;return}
+      const win=window.open(url,'_blank');if(win)win.opener=null;
+    });
     const scrollCue=document.querySelector('.scroll-cue');
     addEventListener('scroll',()=>scrollCue.classList.toggle('hidden',scrollY>40),{passive:true});
-    const button=document.querySelector('.menu-button');
-    const panel=document.querySelector('.menu-panel');
-    button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));button.setAttribute('aria-label',open?'Close menu':'Open menu');panel.classList.toggle('open',open)});
-    panel.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{panel.classList.remove('open');button.setAttribute('aria-expanded','false');button.setAttribute('aria-label','Open menu')}));
+    // Full-screen menu drawer
+    const menuButton=document.querySelector('.menu-button');
+    const drawer=document.getElementById('drawer');
+    const drawerClose=drawer.querySelector('.drawer-close');
+    const drawerLinks=[...drawer.querySelectorAll('.drawer-nav a')];
+    function markActiveLink(){let current=drawerLinks[0];drawerLinks.forEach(link=>{const target=document.querySelector(link.getAttribute('href'));if(target&&target.getBoundingClientRect().top<=innerHeight*.4)current=link});drawerLinks.forEach(link=>link.classList.toggle('active',link===current))}
+    function toggleDrawer(open){
+      if(open)markActiveLink();
+      drawer.classList.toggle('open',open);
+      drawer.setAttribute('aria-hidden',String(!open));
+      menuButton.setAttribute('aria-expanded',String(open));
+      document.body.style.overflow=open?'hidden':'';
+      if(open)drawerClose.focus();else menuButton.focus({preventScroll:true});
+    }
+    menuButton.addEventListener('click',()=>toggleDrawer(true));
+    drawerClose.addEventListener('click',()=>toggleDrawer(false));
+    drawerLinks.forEach(link=>link.addEventListener('click',()=>toggleDrawer(false)));
+    addEventListener('keydown',e=>{if(e.key==='Escape'&&drawer.classList.contains('open'))toggleDrawer(false)});
   </script>
 </body>
 </html>
