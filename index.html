@@ -14,7 +14,8 @@
     a{color:inherit;text-decoration:none}
     .opening{height:100vh;height:100svh;min-height:480px;position:relative;overflow:hidden;background:var(--canvas);isolation:isolate;border-bottom:10px solid var(--frame)}
     .art{position:absolute;inset:0;z-index:-1;display:grid;place-items:center;overflow:hidden;background:var(--canvas)}
-    .art video{width:auto;height:auto;max-width:90vw;max-height:78vh;object-fit:contain;object-position:center center;display:block;mix-blend-mode:multiply}
+    .art picture{display:contents}
+    .art img{width:auto;height:auto;max-width:90vw;max-height:78vh;object-fit:contain;object-position:center center;display:block;mix-blend-mode:multiply}
     .topbar{position:absolute;z-index:2;top:0;left:0;right:0;height:94px;padding:20px clamp(22px,7vw,80px);display:flex;align-items:center;justify-content:space-between}
     .logo{display:block;width:100px;height:58px;overflow:hidden;background:var(--canvas);isolation:isolate}
     .logo video{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
@@ -81,7 +82,7 @@
     .footer-col a:hover{color:#f0c58b}
     .footer-bottom{grid-column:1/-1;border-top:1px solid #ffffff35;margin-top:17px;padding-top:17px;color:#ffffffa8;font-size:11px}
     @media(max-width:900px){.footer{grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 8vw}.footer-bottom{margin-top:0}}
-    @media(max-width:680px){.opening{min-height:560px}.topbar{height:82px;padding:14px 22px}.logo{width:82px;height:50px}.art video{width:100%;height:auto;max-width:none;object-fit:contain}.stats{min-height:0;padding:22px 6vw;grid-template-columns:repeat(2,minmax(0,1fr));row-gap:0}.stat{padding:23px 8px;border-right:1px solid rgba(250,245,241,.28);border-bottom:1px solid rgba(250,245,241,.28)}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}.stat-number{font-size:42px}.stat-label{font-size:8px;letter-spacing:.13em}.style-section{padding:76px 8vw 82px;grid-template-columns:1fr;gap:32px}.style-photo{height:58vh;min-height:320px;max-height:540px}.style-copy h2{font-size:52px}.style-copy p{font-size:13px}.footer{padding:42px 7vw 22px;grid-template-columns:1fr 1fr;gap:28px 22px}.footer-brand{grid-column:1/-1}.footer-brand video{width:140px;height:78px}.footer-col h3{font-size:15px}.footer-col a,.footer-brand p{font-size:12px}.footer-bottom{grid-column:1/-1}}
+    @media(max-width:680px){.opening{min-height:560px}.topbar{height:82px;padding:14px 22px}.logo{width:82px;height:50px}.art img{width:100%;height:auto;max-width:none;object-fit:contain}.stats{min-height:0;padding:22px 6vw;grid-template-columns:repeat(2,minmax(0,1fr));row-gap:0}.stat{padding:23px 8px;border-right:1px solid rgba(250,245,241,.28);border-bottom:1px solid rgba(250,245,241,.28)}.stat:nth-child(2){border-right:0}.stat:nth-child(3),.stat:nth-child(4){border-bottom:0}.stat-number{font-size:42px}.stat-label{font-size:8px;letter-spacing:.13em}.style-section{padding:76px 8vw 82px;grid-template-columns:1fr;gap:32px}.style-photo{height:58vh;min-height:320px;max-height:540px}.style-copy h2{font-size:52px}.style-copy p{font-size:13px}.footer{padding:42px 7vw 22px;grid-template-columns:1fr 1fr;gap:28px 22px}.footer-brand{grid-column:1/-1}.footer-brand video{width:140px;height:78px}.footer-col h3{font-size:15px}.footer-col a,.footer-brand p{font-size:12px}.footer-bottom{grid-column:1/-1}}
     @media(max-width:680px){.gallery{padding:67px 6vw 74px}.gallery-head{margin-bottom:20px}.gallery-head h2{font-size:40px}.gallery-arrow{width:36px;height:36px}.gallery-arrow.prev{left:6px}.gallery-arrow.next{right:6px}.gallery-track{gap:11px}.gallery-card{flex-basis:44%;border-radius:17px}.video-section{padding:67px 6vw 74px}.video-section .gallery-head{margin-bottom:20px}.video-section .gallery-head h2{font-size:40px}.video-track{gap:11px}.video-card{flex-basis:44%;border-radius:17px}.video-section .gallery-arrow.prev{left:6px}.video-section .gallery-arrow.next{right:6px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.menu-button span{transition:none}.scroll-cue .mouse::before{animation:none;opacity:1}}
   </style>
@@ -89,7 +90,7 @@
 <body>
   <main>
     <section class="opening" id="home" aria-label="Jayam Stories wedding animation">
-      <div class="art"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture disableremoteplayback aria-label="Animated illustration of a Tamil wedding couple"></video></div>
+      <div class="art"><picture><source media="(orientation: portrait)" srcset="portrait/tamil_wedding_final_frame_1_2_seconds.gif"><img src="landscape/tamil_wedding_sequence_v2.gif" alt="Animated illustration of a Tamil wedding couple"></picture></div>
       <header class="topbar">
         <a class="logo" href="#home" aria-label="Jayam Stories home"><video autoplay muted loop playsinline preload="metadata" disablepictureinpicture><source src="video/logo.webm" type="video/webm"></video></a>
         <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu-panel"><span></span><span></span></button>
@@ -125,11 +126,6 @@
     </footer>
   </main>
   <script>
-    const heroVideo=document.querySelector('.art video');
-    const portraitMode=window.matchMedia('(orientation: portrait)');
-    function setHeroVideo(){const file=portraitMode.matches?'Portrate_HomeSection.webm':'Landscape_HomeSection.webm';const src='video/'+file;if(heroVideo.dataset.src!==src){heroVideo.dataset.src=src;heroVideo.src=src;heroVideo.load();heroVideo.play().catch(()=>{})}}
-    setHeroVideo();
-    portraitMode.addEventListener?.('change',setHeroVideo);
     const statsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const stat=entry.target;const number=stat.querySelector('.stat-number');const target=Number(number.dataset.count);const suffix=number.dataset.suffix||'';const duration=1300;const start=performance.now();stat.classList.add('visible');function count(now){const progress=Math.min((now-start)/duration,1);const eased=1-Math.pow(1-progress,3);number.textContent=Math.round(target*eased)+suffix;if(progress<1)requestAnimationFrame(count)}requestAnimationFrame(count);statsObserver.unobserve(stat)}}),{threshold:.35});
     document.querySelectorAll('.stat').forEach(stat=>statsObserver.observe(stat));
     const galleryTrack=document.querySelector('.gallery-track');
