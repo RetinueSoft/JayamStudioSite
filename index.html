@@ -7,7 +7,7 @@
   <meta name="description" content="Jayam Stories — wedding films that hold on to the feeling of your day.">
   <title>Jayam Stories — Wedding Films</title>
   <style>
-    :root{--canvas:#F3EDF2;--ink:#151411;--line:rgba(21,20,17,.18);--frame:#76566E}
+    :root{--canvas:#FAF4E9;--ink:#151411;--line:rgba(21,20,17,.18);--frame:#9E2638}
     *{box-sizing:border-box}
     html{scroll-behavior:smooth;background:var(--canvas)}
     body{margin:0;background:var(--canvas);color:var(--ink);font-family:Arial,sans-serif}
@@ -26,13 +26,13 @@
     .menu-panel{position:absolute;z-index:3;top:78px;right:clamp(20px,7vw,80px);display:none;min-width:170px;padding:18px 20px;background:var(--canvas);border:1px solid var(--line);text-align:right}
     .menu-panel.open{display:grid;gap:16px}
     .menu-panel a{font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:4px}
-    .scroll-cue{position:absolute;z-index:2;left:50%;bottom:clamp(18px,3.5vh,34px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:#76566E;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:6px 10px;transition:opacity .4s ease,transform .4s ease}
+    .scroll-cue{position:absolute;z-index:2;left:50%;bottom:clamp(18px,3.5vh,34px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:#9E2638;font-size:9px;letter-spacing:.3em;text-transform:uppercase;padding:6px 10px;transition:opacity .4s ease,transform .4s ease}
     .scroll-cue .mouse{width:24px;height:38px;border:1.5px solid currentColor;border-radius:14px;position:relative;opacity:.85;transition:opacity .2s}
     .scroll-cue .mouse::before{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:currentColor;animation:cue-wheel 1.8s ease-in-out infinite}
     .scroll-cue:hover .mouse,.scroll-cue:focus-visible .mouse{opacity:1}
     .scroll-cue.hidden{opacity:0;transform:translate(-50%,10px);pointer-events:none}
     @keyframes cue-wheel{0%{opacity:0;transform:translateY(0)}25%{opacity:1}70%{opacity:1;transform:translateY(11px)}100%{opacity:0;transform:translateY(13px)}}
-    .stats{position:relative;margin-top:-1px;min-height:180px;padding:38px 7vw;background:#76566E;color:#FAF5F1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
+    .stats{position:relative;margin-top:-1px;min-height:180px;padding:38px 7vw;background:#9E2638;color:#FAF5F1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:center}
     .stat{text-align:center;padding:10px 14px;border-right:1px solid rgba(250,245,241,.28)}
     .stat:last-child{border-right:0}
     .stat-number{display:block;font:400 clamp(36px,4.6vw,58px)/1 Georgia,'Times New Roman',serif;letter-spacing:-.035em;opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
@@ -44,11 +44,11 @@
     .style-copy{max-width:620px}
     .style-copy h2{font:400 clamp(44px,6vw,76px)/.98 Georgia,'Times New Roman',serif;letter-spacing:-.035em;margin:20px 0 27px}
     .style-copy p{font-size:13px;line-height:2;color:#5e5852;margin:0 0 16px}
-    .gallery{padding:86px 7vw 96px;background:#E8DCE4;overflow:hidden}
+    .gallery{padding:86px 7vw 96px;background:#F3E0D8;overflow:hidden}
     .gallery-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:27px}
     .gallery-head h2{font-size:clamp(38px,5vw,62px);margin:12px 0 0}
     .gallery-viewport{position:relative}
-    .gallery-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(21,20,17,.2);border-radius:50%;background:rgba(243,237,242,.92);backdrop-filter:blur(8px);color:var(--ink);font-size:23px;line-height:1;cursor:pointer;box-shadow:0 3px 14px #0002;transition:background .2s,color .2s,transform .2s}
+    .gallery-arrow{position:absolute;z-index:2;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(21,20,17,.2);border-radius:50%;background:rgba(250,244,233,.92);backdrop-filter:blur(8px);color:var(--ink);font-size:23px;line-height:1;cursor:pointer;box-shadow:0 3px 14px #0002;transition:background .2s,color .2s,transform .2s}
     .gallery-arrow:hover{background:var(--ink);color:#fff;transform:translateY(-50%) scale(1.05)}
     .gallery-arrow.prev{left:10px}.gallery-arrow.next{right:10px}
     .gallery-track{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 1px 5px;scrollbar-width:none}
@@ -74,7 +74,7 @@
     .eyebrow{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#766b60}
     h1,h2{font-family:Georgia,'Times New Roman',serif;font-weight:400;line-height:.98;letter-spacing:-.035em}
     h2{font-size:clamp(44px,6vw,82px);margin:22px 0}
-    .footer{padding:55px 7vw 24px;background:#76566E;color:#FAF5F1;display:grid;grid-template-columns:1.25fr .9fr 1.1fr 1.25fr;gap:4vw;font-size:13px;line-height:1.7}
+    .footer{padding:55px 7vw 24px;background:#9E2638;color:#FAF5F1;display:grid;grid-template-columns:1.25fr .9fr 1.1fr 1.25fr;gap:4vw;font-size:13px;line-height:1.7}
     .footer-brand video{display:block;width:155px;height:88px;object-fit:contain;filter:invert(1);mix-blend-mode:screen;margin:-14px 0 8px}
     .footer-brand p{max-width:280px;color:#ffffffbf;margin:0;font-size:13px;line-height:1.8}
     .footer-col h3{font:600 17px/1.2 Arial,sans-serif;margin:0 0 18px;color:#fff}
