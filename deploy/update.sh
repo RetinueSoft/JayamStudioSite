@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Deploys the website files of the release branch into /root/jayamstudiosite/site.
-# The server's common Caddy serves that folder (VpsSetup caddy/sites/jayamstudio.caddy); nothing to restart.
+# The server's common Caddy serves that folder (VpsSetup caddy/sites/jayamstudiosite.caddy); nothing to restart.
 # Needs /root/common (RetinueSoft/VpsSetup); /root/common/setup.sh installs it the first time.
 #
 #   sudo /root/jayamstudiosite/update.sh     deploy the newest release commit now (does nothing if already deployed)
