@@ -106,6 +106,7 @@
     .field{display:grid;gap:8px;min-width:0}
     .field.full{grid-column:1/-1}
     .field label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#766b60}
+    .field label .optional{letter-spacing:.08em;text-transform:none;color:#a39a8f}
     .field input{width:100%;min-width:0;font:15px/1.4 Arial,sans-serif;color:var(--text-primary);background:transparent;border:0;border-bottom:1px solid #cfc6ba;border-radius:0;padding:10px 0;outline:none;transition:border-color .2s}
     .field input:focus{border-bottom-color:var(--primary-brand)}
     .field input::placeholder{color:#b3aa9f}
@@ -163,10 +164,10 @@
         <p>We limit our calendar to an exclusive number of weddings each season to guarantee total creative immersion and unmatched care for every film.</p>
       </div>
       <form class="book-form" novalidate>
-        <div class="field full"><label for="book-names">Names</label><input id="book-names" name="names" type="text" placeholder="Bride &amp; Groom" autocomplete="name" required></div>
-        <div class="field"><label for="book-date">Event date</label><input id="book-date" name="date" type="date" required></div>
-        <div class="field"><label for="book-location">Location</label><input id="book-location" name="location" type="text" placeholder="City or venue" required></div>
+        <div class="field full"><label for="book-names">Names</label><input id="book-names" name="names" type="text" placeholder="Bride &amp; Groom / Your Name" autocomplete="name" required></div>
         <div class="field full"><label for="book-phone">Phone number</label><input id="book-phone" name="phone" type="tel" placeholder="+91 XXXXX XXXXX" autocomplete="tel" inputmode="tel" required></div>
+        <div class="field"><label for="book-date">Event date <span class="optional">(optional)</span></label><input id="book-date" name="date" type="date"></div>
+        <div class="field"><label for="book-location">Location <span class="optional">(optional)</span></label><input id="book-location" name="location" type="text" placeholder="City or venue"></div>
         <button class="book-submit" type="submit">Tell us about your day <span aria-hidden="true">&rarr;</span></button>
         <p class="book-status" role="status" aria-live="polite"></p>
       </form>
@@ -254,8 +255,10 @@
       e.preventDefault();
       if(!bookForm.checkValidity()){bookForm.reportValidity();return}
       const d=new FormData(bookForm);const get=n=>(d.get(n)||'').toString().trim();
-      const date=new Date(get('date')+'T00:00').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'});
-      const text=['New booking enquiry from Jayam Stories website','','Names: '+get('names'),'Event date: '+date,'Location: '+get('location'),'Phone: '+get('phone')].join('\n');
+      const lines=['New booking enquiry from Jayam Stories website','','Names: '+get('names'),'Phone: '+get('phone')];
+      if(get('date'))lines.push('Event date: '+new Date(get('date')+'T00:00').toLocaleDateString('en-IN',{day:'numeric',month:'long',year:'numeric'}));
+      if(get('location'))lines.push('Location: '+get('location'));
+      const text=lines.join('\n');
       const url='https://wa.me/'+WHATSAPP_NUMBER+'?text='+encodeURIComponent(text);
       bookStatus.textContent='Opening WhatsApp... Please tap Send in WhatsApp to deliver your message. ';
       const link=document.createElement('a');link.href=url;link.target='_blank';link.rel='noopener';link.textContent='Click here if WhatsApp did not open.';bookStatus.appendChild(link);
